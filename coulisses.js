@@ -1,11 +1,10 @@
-/* Maquette : comportements simulés (aucun envoi réel).
-   Chaque bloc est indépendant : si un élément est absent du HTML, il est simplement ignoré. */
+
 (function(){
   var $=function(s,c){return (c||document).querySelector(s)};
   var emailOk=function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)};
   var say=function(el,t,ok){el.textContent=t;el.className='cdo-msg '+(ok?'ok':'err')};
 
-  /* Modale « Me prévenir » */
+
   var modal=$('#cdo-modal'),mode='',lastFocus=null;
   if(modal){
     var open=function(m,title){mode=m;lastFocus=document.activeElement;
@@ -26,7 +25,7 @@
       say(m,mode==='alert'?'C’est noté, vous serez prévenu(e) (simulation).':'Préinscription enregistrée (simulation).',true);
       setTimeout(close,1400);});
 
-    /* Boutons « Me prévenir » / « Précommander » de chaque carte « À paraître » */
+
     [].forEach.call(document.querySelectorAll('.cdo-up'),function(card){
       var alertBtn=$('.js-alert',card),preBtn=$('.js-preorder',card),title=card.getAttribute('data-title');
       if(alertBtn)alertBtn.addEventListener('click',function(){open('alert',title)});
@@ -35,5 +34,5 @@
   }
 })();
 
-/* Maquette : liens désactivés */
+
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="#"]');if(a)e.preventDefault()});
